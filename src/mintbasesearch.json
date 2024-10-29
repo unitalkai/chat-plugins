@@ -7,9 +7,13 @@
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/mintbasesearch/logo.webp",
     "description": "Find any NFT data on the NEAR Protocol.",
-    "tags": ["crypto", "nft"],
+    "tags": [
+      "crypto",
+      "nft"
+    ],
     "title": "MintbaseSearch",
-    "category": "web-search"
+    "category": "web-search",
+    "featured": false
   },
   "schemaVersion": 1
 }

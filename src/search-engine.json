@@ -6,10 +6,14 @@
   "manifest": "https://search-engine.chat-plugin.lobehub.com/manifest.json",
   "meta": {
     "avatar": "🔍",
-    "tags": ["web", "search"],
+    "tags": [
+      "web",
+      "search"
+    ],
     "title": "Search Engine",
     "description": "Query search engine to get information",
-    "category": "web-search"
+    "category": "web-search",
+    "featured": false
   },
   "schemaVersion": 1
 }

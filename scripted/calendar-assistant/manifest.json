@@ -1,0 +1,67 @@
+{
+  "$schema": "../node_modules/@lobehub/chat-plugin-sdk/schema.json",
+  "api": [
+    {
+      "url": "https://www.ccalendar.space/api/calendar",
+      "name": "manageEvents",
+      "description": "管理用户的日程事件，包括添加、查询、更新和删除，并给出日历地址；建议搭配日程助手一起使用",
+      "parameters": {
+        "properties": {
+          "action": {
+            "description": "要执行的操作, 如添加:add, 查询:list, 删除:delete",
+            "enum": ["add", "list", "delete"],
+            "type": "string"
+          },
+          "startDateTime": {
+            "description": "用户给出的日程开始日期和时间; 在执行'add'或'list'时,需询问用户获取; 使用格式为{'YYYY-MM-DDTHH:mm:ss.SSS+08:00' }",
+            "type": "string"
+          },
+          "endDateTime": {
+            "description": "用户给出的日程结束日期和时间; 在执行'add'或'list'时,需询问用户获取; 用格式为{'YYYY-MM-DDTHH:mm:ss.SSS+08:00' }",
+            "type": "string"
+          },
+          "eventDetails": {
+            "description": "根据用户给出的信息总结出日程详细信息",
+            "type": "string"
+          },
+          "eventSummary": {
+            "description": "用户给出的日程的标题, 当用户没有指定时,询问用户",
+            "type": "string"
+          },
+          "eventId": {
+            "description": "日程的ID, 用于对'指定的日程'进行更新或删除; 当执行'delete'时, 如果上下文中没有'eventiD', 通过用户给出eventDetails查询得到",
+            "type": "string"
+          }
+        },
+        "required": ["action"],
+        "type": "object",
+        "description": "执行'add'或'list'时，要同时带上'startDateTime','endDateTime', 'eventSummary', eventDetails'; 执行'delete'的时候, 要带上'eventId '"
+      }
+    }
+  ],
+  "author": "cc",
+  "createdAt": "2024-01-08",
+  "homepage": "https://www.ccalendar.space/index.html",
+  "identifier": "calendar-assistant",
+  "meta": {
+    "avatar": "📅",
+    "tags": ["calendar", "schedule"],
+    "title": "Calendar Assistant",
+    "description": "A plugin to manage your calendar events"
+  },
+  "settings": {
+    "type": "object",
+    "required": ["CALENDAR_KEY"],
+    "properties": {
+      "CALENDAR_KEY": {
+        "title": "Calendar User Key",
+        "description": "通过google辅助日历进行日程管理，为了账号安全，请设置一个初始密码",
+        "type": "string",
+        "minLength": 6,
+        "maxLength": 64,
+        "format": "password"
+      }
+    }
+  },
+   "version": "1"
+}

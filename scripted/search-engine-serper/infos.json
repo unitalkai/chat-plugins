@@ -1,0 +1,90 @@
+{
+  "components": {
+    "securitySchemes": {
+      "apiAuth": {
+        "type": "apiKey",
+        "name": "X-API-KEY",
+        "in": "header"
+      }
+    }
+  },
+  "info": {
+    "title": "Web Search",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/search": {
+      "post": {
+        "summary": "Search Google and return top 10 results",
+        "operationId": "searchGoogle",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Search query string"
+          },
+          {
+            "in": "query",
+            "name": "gl",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Google Geo location parameter"
+          },
+          {
+            "in": "query",
+            "name": "hl",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Google Geo locale parameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result"
+                  ],
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Top 10 search results",
+                      "example": "\"title\": \"周末游推荐\",\n\"link\": \"https://www.example.com/destinations-for-weekends\",\n\"snippet\": \"周末去哪玩?周末旅游频道,精心推荐数百个周末游经典线路\",\n\"position\": 1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "apiAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://google.serper.dev"
+    }
+  ]
+}

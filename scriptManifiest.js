@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 const srcDir = path.join(__dirname, "src");
 const outputDir = path.join(__dirname, "scripted");
 
-// Helper function to download JSON and images
 function downloadFile(url, filePath) {
   return new Promise((resolve, reject) => {
     https
@@ -30,7 +29,6 @@ function downloadFile(url, filePath) {
   });
 }
 
-// Function to process each JSON file
 async function processFile(filePath) {
   try {
     const fileData = fs.readFileSync(filePath, "utf8");
@@ -48,7 +46,6 @@ async function processFile(filePath) {
       fs.mkdirSync(fileDir, { recursive: true });
     }
 
-    // Download manifest JSON
     const manifestPath = path.join(fileDir, "manifest.json");
     const manifestData = await new Promise((resolve, reject) => {
       https
@@ -69,7 +66,6 @@ async function processFile(filePath) {
     });
     fs.writeFileSync(manifestPath, manifestData, "utf8");
 
-    // Download avatar image
     const avatarExt = path.extname(new URL(avatar).pathname);
     const avatarPath = path.join(fileDir, `avatar${avatarExt}`);
     await downloadFile(avatar, avatarPath);
@@ -80,7 +76,6 @@ async function processFile(filePath) {
   }
 }
 
-// Main function to process all JSON files in `src`
 async function main() {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
@@ -95,4 +90,5 @@ async function main() {
   console.log("All files processed");
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 main().catch(console.error);

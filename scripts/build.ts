@@ -13,6 +13,7 @@ import {
   publicDir,
 } from "./const";
 import { checkDir, findDuplicates, readJSON, writeJSON } from "./utils";
+import {custom} from "zod";
 
 const build = async () => {
   checkDir(publicDir);
@@ -49,7 +50,11 @@ const build = async () => {
     pluginsIndex.plugins = list[locale].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
-
+    pluginsIndex.plugins = pluginsIndex.plugins.map(plugin=>{
+      let customPlugin = plugin;
+      customPlugin.manifest = `https://chat-plugins-git-scripted-kayros.vercel.app/manifest-${plugin.identifier}.json`
+      return customPlugin
+    });
     let tags: string[] = [];
 
     pluginsIndex.plugins.forEach((plugin) => {
@@ -67,7 +72,6 @@ const build = async () => {
   }
 
   for (const plugin of pluginsIndex.plugins){
-    const manifestPath = resolve(pluginsDataDir, plugin.identifier,'manifest.json');
 
     const avatarPath = resolve(pluginsDataDir, plugin.identifier,'avatar.webp');
     if(fs.existsSync(avatarPath)){
@@ -75,6 +79,7 @@ const build = async () => {
       fs.cpSync(avatarPath, resolve(publicDir, name))
       consola.success(`build ${name}`);
     }
+    const manifestPath = resolve(pluginsDataDir, plugin.identifier,'manifest.json');
     if(fs.existsSync(manifestPath)){
       const manifestData = await readJSON(manifestPath);
       const name = `manifest-${plugin.identifier}.json`;

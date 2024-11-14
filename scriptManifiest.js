@@ -39,7 +39,7 @@ async function processFile(filePath) {
     } = jsonContent;
     const identifier = jsonContent.identifier;
 
-    const folderName = path.basename(filePath, ".json");
+    const folderName = path.basename(identifier, ".json");
     const fileDir = path.join(outputDir, folderName);
 
     if (!fs.existsSync(fileDir)) {

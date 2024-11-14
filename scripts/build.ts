@@ -1,6 +1,6 @@
 import { consola } from "consola";
 import { cloneDeep, merge } from "lodash-es";
-import path, { resolve } from "node:path";
+import { resolve } from "node:path";
 import fs from "node:fs";
 
 import { formatAndCheckSchema } from "./check";
@@ -25,20 +25,18 @@ const build = async () => {
   const list = {};
 
   for (const file of plugins) {
-    if (file.isFile()) {
-      const filePath = path.resolve(pluginsDir, file.name);
-      if (filePath) {
-        const data = readJSON(resolve(pluginsDir, file.name));
-
-        const plugin = formatAndCheckSchema(data);
-        if (!list[config.entryLocale]) list[config.entryLocale] = [];
-        list[config.entryLocale].push(plugin);
-        for (const locale of config.outputLocales) {
-          if (!list[locale]) list[locale] = [];
-          const localeFilePath = resolve(
-            localesDir,
-            file.name.replace(".json", `.${locale}.json`)
-          );
+    if (file.isFile() && fs.existsSync(resolve(pluginsDir, file.name))) {
+      const data = readJSON(resolve(pluginsDir, file.name));
+      const plugin = formatAndCheckSchema(data);
+      if (!list[config.entryLocale]) list[config.entryLocale] = [];
+      list[config.entryLocale].push(plugin);
+      for (const locale of config.outputLocales) {
+        if (!list[locale]) list[locale] = [];
+        const localeFilePath = resolve(
+          localesDir,
+          file.name.replace(".json", `.${locale}.json`)
+        );
+        if (fs.existsSync(localeFilePath)) {
           const localeData = readJSON(localeFilePath);
           list[locale].push(merge(cloneDeep(plugin), localeData));
         }

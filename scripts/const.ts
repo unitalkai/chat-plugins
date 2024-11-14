@@ -23,7 +23,7 @@ export const readmeCnPath = resolve(root, "README.zh-CN.md");
 
 export const metaPath = resolve(root, "meta.json");
 export const meta = readJSON(metaPath);
-
+export const pluginsDataDir = resolve(root, "./scripted");
 export const readmeSplit = "<!-- AWESOME PLUGINS -->";
 
 export const SYNC_URL = "https://openai-collections.chat-plugin.lobehub.com";

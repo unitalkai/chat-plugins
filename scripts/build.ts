@@ -8,7 +8,7 @@ import {
   config,
   localesDir,
   meta,
-  plugins,
+  plugins, pluginsDataDir,
   pluginsDir,
   publicDir,
 } from "./const";
@@ -64,6 +64,24 @@ const build = async () => {
       locale === config.entryLocale ? `index.json` : `index.${locale}.json`;
     writeJSON(resolve(publicDir, name), pluginsIndex, false);
     consola.success(`build ${name}`);
+  }
+
+  for (const plugin of pluginsIndex.plugins){
+    const manifestPath = resolve(pluginsDataDir, plugin.identifier,'manifest.json');
+
+    const avatarPath = resolve(pluginsDataDir, plugin.identifier,'avatar.webp');
+    if(fs.existsSync(avatarPath)){
+      const name = `avatar-${plugin.identifier}.webp`;
+      fs.cpSync(avatarPath, resolve(publicDir, name))
+      consola.success(`build ${name}`);
+    }
+    if(fs.existsSync(manifestPath)){
+      const manifestData = await readJSON(manifestPath);
+      const name = `manifest-${plugin.identifier}.json`;
+      writeJSON(resolve(publicDir, name), manifestData, false);
+      consola.success(`build ${name}`);
+    }
+
   }
 };
 

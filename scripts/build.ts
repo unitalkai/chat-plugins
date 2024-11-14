@@ -53,6 +53,7 @@ const build = async () => {
     pluginsIndex.plugins = pluginsIndex.plugins.map(plugin=>{
       let customPlugin = plugin;
       customPlugin.manifest = `https://chat-plugins-git-scripted-kayros.vercel.app/manifest-${plugin.identifier}.json`
+      customPlugin.meta.avatar = `https://chat-plugins-git-scripted-kayros.vercel.app/avatar-${plugin.identifier}.webp`
       return customPlugin
     });
     let tags: string[] = [];

@@ -13,7 +13,7 @@
     ],
     "title": "Web Search",
     "category": "web-search",
-    "featured": false
+    "featured": true
   },
   "schemaVersion": 1
 }

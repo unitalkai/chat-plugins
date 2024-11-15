@@ -13,7 +13,7 @@
     ],
     "title": "Video Captions",
     "category": "media-generate",
-    "featured": false
+    "featured": true
   },
   "schemaVersion": 1
 }

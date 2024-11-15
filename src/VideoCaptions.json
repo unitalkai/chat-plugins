@@ -6,12 +6,12 @@
   "manifest": "https://openai-collections.chat-plugin.lobehub.com/video-captions/manifest.json",
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/video-captions/logo.webp",
-    "description": "Convert Youtube links into transcribed text, enable asking questions, create chapters, and summarize its content.",
+    "description": "Converts Youtube video links into transcribed text, enabling users to ask questions about the video, create chapters, and summarize its content.",
     "tags": [
       "video-to-text",
       "youtube"
     ],
-    "title": "Video Captions",
+    "title": "Youtube Transcripts",
     "category": "media-generate",
     "featured": true
   },

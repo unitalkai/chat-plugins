@@ -4,7 +4,7 @@
     {
       "url": "https://pollinations.ai-chat.top/api/drawing",
       "name": "drawing",
-      "description": "根据用户要求进行画图。",
+      "description": "Create illustrations based on user specifications",
       "parameters": {
         "properties": {
           "description": {
@@ -25,8 +25,8 @@
   "meta": {
     "avatar": "🎨",
     "tags": ["drawing"],
-    "title": "授粉 AI 画图",
-    "description": "通过 pollinations.ai 进行图像生成"
+    "title": "Pollination AI Drawing",
+    "description": "Generate images through pollinations.ai"
   },
   "type": "markdown",
   "version": "1"

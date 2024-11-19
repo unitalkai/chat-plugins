@@ -8,11 +8,12 @@ import {
   config,
   localesDir,
   meta,
-  plugins,
+  plugins, pluginsDataDir,
   pluginsDir,
   publicDir,
 } from "./const";
 import { checkDir, findDuplicates, readJSON, writeJSON } from "./utils";
+import {custom} from "zod";
 
 const build = async () => {
   checkDir(publicDir);
@@ -49,7 +50,13 @@ const build = async () => {
     pluginsIndex.plugins = list[locale].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
-
+    pluginsIndex.plugins = pluginsIndex.plugins.map(plugin=>{
+      let customPlugin = plugin;
+      customPlugin.author = customPlugin.author.toLowerCase() === 'lobehub' ? 'Unitalk' : customPlugin.author;
+      customPlugin.manifest = `https://chat-plugins-git-scripted-kayros.vercel.app/manifest-${plugin.identifier}.json`
+      customPlugin.meta.avatar = `https://chat-plugins-git-scripted-kayros.vercel.app/avatar-${plugin.identifier}.webp`
+      return customPlugin
+    });
     let tags: string[] = [];
 
     pluginsIndex.plugins.forEach((plugin) => {
@@ -64,6 +71,24 @@ const build = async () => {
       locale === config.entryLocale ? `index.json` : `index.${locale}.json`;
     writeJSON(resolve(publicDir, name), pluginsIndex, false);
     consola.success(`build ${name}`);
+  }
+
+  for (const plugin of pluginsIndex.plugins){
+
+    const avatarPath = resolve(pluginsDataDir, plugin.identifier,'avatar.webp');
+    if(fs.existsSync(avatarPath)){
+      const name = `avatar-${plugin.identifier}.webp`;
+      fs.cpSync(avatarPath, resolve(publicDir, name))
+      consola.success(`build ${name}`);
+    }
+    const manifestPath = resolve(pluginsDataDir, plugin.identifier,'manifest.json');
+    if(fs.existsSync(manifestPath)){
+      const manifestData = await readJSON(manifestPath);
+      const name = `manifest-${plugin.identifier}.json`;
+      writeJSON(resolve(publicDir, name), manifestData, false);
+      consola.success(`build ${name}`);
+    }
+
   }
 };
 

@@ -1,19 +1,19 @@
 {
   "author": "plugsugar",
-  "createdAt": "2024-01-17",
+  "createdAt": "2024-10-17",
   "homepage": "https://websearch.plugsugar.com",
   "identifier": "web_search",
   "manifest": "https://openai-collections.chat-plugin.lobehub.com/web-search/manifest.json",
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/web-search/logo.webp",
-    "description": "Search for information from the internet",
+    "description": "Searches Google and returns the top 10 results",
     "tags": [
       "search",
       "plugsugar"
     ],
-    "title": "Web Search",
+    "title": "Google Search",
     "category": "web-search",
-    "featured": false
+    "featured": true
   },
   "schemaVersion": 1
 }

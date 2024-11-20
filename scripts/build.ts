@@ -1,26 +1,26 @@
-import { consola } from "consola";
-import { cloneDeep, merge } from "lodash-es";
-import { resolve } from "node:path";
-import fs from "node:fs";
+import { cloneDeep, merge } from 'lodash-es';
+import fs from 'node:fs';
+import { cp } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
-import { formatAndCheckSchema } from "./check";
+import { formatAndCheckSchema } from './check';
 import {
   config,
   localesDir,
   meta,
-  plugins, pluginsDataDir,
+  plugins,
+  pluginsDataDir,
   pluginsDir,
-  publicDir,
-} from "./const";
-import { checkDir, findDuplicates, readJSON, writeJSON } from "./utils";
-import {custom} from "zod";
+  publicDir
+} from './const';
+import { checkDir, findDuplicates, readJSON, writeJSON } from './utils';
 
 const build = async () => {
   checkDir(publicDir);
 
   const pluginsIndex = {
     ...meta,
-    plugins: [],
+    plugins: []
   };
 
   const list = {};
@@ -35,7 +35,7 @@ const build = async () => {
         if (!list[locale]) list[locale] = [];
         const localeFilePath = resolve(
           localesDir,
-          file.name.replace(".json", `.${locale}.json`)
+          file.name.replace('.json', `.${locale}.json`)
         );
         if (fs.existsSync(localeFilePath)) {
           const localeData = readJSON(localeFilePath);
@@ -50,18 +50,21 @@ const build = async () => {
     pluginsIndex.plugins = list[locale].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
-    pluginsIndex.plugins = pluginsIndex.plugins.map(plugin=>{
+    pluginsIndex.plugins = pluginsIndex.plugins.map((plugin) => {
       let customPlugin = plugin;
-      customPlugin.author = customPlugin.author.toLowerCase() === 'lobehub' ? 'Unitalk' : customPlugin.author;
-      customPlugin.manifest = `https://chat-plugins-git-scripted-kayros.vercel.app/manifest-${plugin.identifier}.json`
-      customPlugin.meta.avatar = `https://chat-plugins-git-scripted-kayros.vercel.app/avatar-${plugin.identifier}.webp`
-      return customPlugin
+      customPlugin.author =
+        customPlugin.author.toLowerCase() === 'lobehub'
+          ? 'Unitalk'
+          : customPlugin.author;
+      customPlugin.manifest = `https://chat-plugins-git-scripted-kayros.vercel.app/manifest-${plugin.identifier}.json`;
+      customPlugin.meta.avatar = `https://chat-plugins-git-scripted-kayros.vercel.app/avatar-${plugin.identifier}.webp`;
+      return customPlugin;
     });
     let tags: string[] = [];
 
-    pluginsIndex.plugins.forEach((plugin) => {
+    for (const plugin of pluginsIndex.plugins) {
       tags = [...tags, ...plugin.meta.tags];
-    });
+    }
 
     tags = findDuplicates(tags);
 
@@ -70,25 +73,36 @@ const build = async () => {
     const name =
       locale === config.entryLocale ? `index.json` : `index.${locale}.json`;
     writeJSON(resolve(publicDir, name), pluginsIndex, false);
-    consola.success(`build ${name}`);
+    // consola.success(`build ${name}`);
   }
 
-  for (const plugin of pluginsIndex.plugins){
-
-    const avatarPath = resolve(pluginsDataDir, plugin.identifier,'avatar.webp');
-    if(fs.existsSync(avatarPath)){
+  for (const plugin of pluginsIndex.plugins) {
+    const avatarPath = resolve(
+      pluginsDataDir,
+      plugin.identifier,
+      'avatar.webp'
+    );
+    if (fs.existsSync(avatarPath)) {
+      console.log(avatarPath);
       const name = `avatar-${plugin.identifier}.webp`;
-      fs.cpSync(avatarPath, resolve(publicDir, name))
-      consola.success(`build ${name}`);
+      await cp(avatarPath, resolve(publicDir, name));
+      // consola.success(`build ${name}`);
+    } else {
+      console.warn(
+        `avatar-${plugin.identifier}.webp does not exist: ${avatarPath}`
+      );
     }
-    const manifestPath = resolve(pluginsDataDir, plugin.identifier,'manifest.json');
-    if(fs.existsSync(manifestPath)){
+    const manifestPath = resolve(
+      pluginsDataDir,
+      plugin.identifier,
+      'manifest.json'
+    );
+    if (fs.existsSync(manifestPath)) {
       const manifestData = await readJSON(manifestPath);
       const name = `manifest-${plugin.identifier}.json`;
       writeJSON(resolve(publicDir, name), manifestData, false);
-      consola.success(`build ${name}`);
+      // consola.success(`build ${name}`);
     }
-
   }
 };
 

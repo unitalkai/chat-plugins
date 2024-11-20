@@ -14,7 +14,7 @@
     "title": "Calendar Assistant",
     "description": "A plugin to manage your calendar events # will auto generate i18n in workflow",
     "category": "tools",
-    "featured": true
+    "featured": false
   },
   "schemaVersion": 1
 }

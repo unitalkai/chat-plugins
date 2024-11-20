@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Recherche Web",
-    "description": "Recherchez des informations sur Internet.",
-    "tags": ["recherche", "plugsugar"]
+    "title": "Recherche Google",
+    "description": "Recherche sur Google et renvoie les 10 meilleurs résultats.",
+    "tags": ["recherche", "google"]
   }
 }

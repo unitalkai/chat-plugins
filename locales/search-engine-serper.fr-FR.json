@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rechercher sur Google via Serper",
-    "description": "Moteur de recherche Google via l'API gratuite de Serper.dev (2500x🆓/mois)",
-    "tags": ["web", "search"]
+    "title": "Recherche Google via Serper",
+    "description": "Recherche sur Google via l'API gratuite de Serper.dev (2500x🆓/mois)",
+    "tags": ["web", "search", "google"]
   }
 }

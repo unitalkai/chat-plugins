@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Recherche Google via Serper",
-    "description": "Recherche sur Google via l'API gratuite de Serper.dev (2500x🆓/mois)",
+    "description": "Recherche sur Google via l'API gratuite de Serper.dev. Obtenez votre clé API sur Serper.dev, les 2500 premières requêtes sont gratuites.",
     "tags": ["web", "search", "google"]
   }
 }

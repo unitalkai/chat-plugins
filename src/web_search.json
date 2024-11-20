@@ -7,7 +7,7 @@
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/web-search/logo.webp",
     "description": "Searches Google and returns top 10 results",
-    "tags": ["search", "plugsugar"],
+    "tags": ["search", "google"],
     "title": "Google Search",
     "category": "web-search",
     "featured": true

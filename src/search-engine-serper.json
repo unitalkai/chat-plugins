@@ -6,7 +6,7 @@
   "manifest": "https://raw.githubusercontent.com/GithuBarry/chat-plugin-search-engine/main/public/manifest.json",
   "meta": {
     "avatar": "https://serper.dev/favicon.ico",
-    "description": "Google search engine via Serper.dev API (first 2500x free)",
+    "description": "Google search engine via Serper.dev API. Get your own API Key on Serper.dev. The first 2500 queries are free.",
     "tags": [
       "web",
       "search"

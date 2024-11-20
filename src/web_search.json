@@ -6,14 +6,14 @@
   "manifest": "https://openai-collections.chat-plugin.lobehub.com/web-search/manifest.json",
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/web-search/logo.webp",
-    "description": "Search for information from the internet",
+    "description": "Searches Google and returns top 10 results",
     "tags": [
       "search",
       "plugsugar"
     ],
-    "title": "Web Search",
+    "title": "Google Search",
     "category": "web-search",
-    "featured": false
+    "featured": true
   },
   "schemaVersion": 1
 }

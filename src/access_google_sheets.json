@@ -6,15 +6,15 @@
   "manifest": "https://openai-collections.chat-plugin.lobehub.com/access-google-sheets/manifest.json",
   "meta": {
     "avatar": "https://openai-collections.chat-plugin.lobehub.com/access-google-sheets/logo.webp",
-    "description": "Ask your Google Sheets questions & chat with excel. Enter Google Drive link to start!",
+    "description": "Ask questions and chat your Google Sheets. Simply enter the public URL of your Google Sheet to get started!",
     "tags": [
       "google",
       "sheets",
       "excel"
     ],
-    "title": "Access Google Sheet",
+    "title": "Google Sheet Assistant",
     "category": "tools",
-    "featured": false
+    "featured": true
   },
   "schemaVersion": 1
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Accéder à Google Sheet",
-    "description": "TEST FR",
+    "title": "Assistant Google Sheet",
+    "description": "Posez des questions et chattez avec vos Google Sheet. Ajoutez simplement l'url publique de votre document Google pour démarrer!",
     "tags": ["google", "sheets", "excel"]
   }
 }

@@ -10,7 +10,7 @@
     "tags": ["search", "google"],
     "title": "Google Search",
     "category": "web-search",
-    "featured": true
+    "featured": false
   },
   "schemaVersion": 1
 }
